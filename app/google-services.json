@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1062224081310",
+    "firebase_url": "https://cs121pettracker.firebaseio.com",
+    "project_id": "cs121pettracker",
+    "storage_bucket": "cs121pettracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062224081310:android:4dfeeab9c869d4f6",
+        "android_client_info": {
+          "package_name": "com.example.mdelc.pettracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062224081310-3286rl4fqd2h16ds7mie2drsv7895o3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmC0HPKj-_9aMs9RA6tFT4_iIpfwmrcaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
