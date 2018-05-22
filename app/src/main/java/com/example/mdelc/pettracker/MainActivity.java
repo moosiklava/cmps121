@@ -1,6 +1,7 @@
 package com.example.mdelc.pettracker;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,21 +18,28 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-        //defining view objects
+    private static final String TAG = "MainPettracker";
+    //defining view objects
         private EditText editTextEmail;
         private EditText editTextPassword;
         private Button buttonSignup;
         private TextView textViewSignin;
         private ProgressDialog progressDialog;
-        //private EditText editTextName;
+        private EditText editTextName;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
-        //defining firebaseauth object
+
+    //defining firebaseauth object
         private FirebaseAuth firebaseAuth;
+        private FirebaseDatabase firebaseDatabase;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //initializing views
             editTextEmail = (EditText) findViewById(R.id.editTextEmail);
             editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-            //editTextName = (EditText) findViewById(R.id.editTextName);
+            editTextName = (EditText) findViewById(R.id.editTextName);
 
             buttonSignup = (Button) findViewById(R.id.buttonSignup);
 
@@ -66,13 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private void registerUser(){
 
             //getting email and password from edit texts
-            String email = editTextEmail.getText().toString().trim();
+            final String email = editTextEmail.getText().toString().trim();
             String password  = editTextPassword.getText().toString().trim();
-            //String name = editTextName.getText().toString().trim();
+            final String name = editTextName.getText().toString().trim();
 
             //checking if email and passwords are empty
-            if(TextUtils.isEmpty(email)){
-                Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            if(TextUtils.isEmpty(email)) {
+                Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -81,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
-            //if(TextUtils.isEmpty(name)){
-              //  Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show();
-                //return;
-            //}
+            if(TextUtils.isEmpty(name)){
+                Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show();
+                return;
+            }
 
             //if the email and password are not empty
             //displaying a progress dialog
@@ -102,6 +110,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 //display some message here
                                 progressDialog.hide();
                                 //finish();
+                                final DatabaseReference databaseReference = database.getReference();
+                                DatabaseReference refEmail = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("email").push();
+                                DatabaseReference refName = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("email").child("name").push();
+                                refEmail.setValue(email);
+                                refName.setValue(name);
+                                DatabaseReference refId = databaseReference.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("email").child("uid").push();
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                refId.setValue(user.getUid());
                                 Toast.makeText(MainActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                             }else{
