@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00E5FF"
+    android:id="@+id/fragment_task_layout"
+    tools:context="com.example.mdelc.pettracker.TaskFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/fragment_background">
+
+        <TextView
+            android:id="@+id/task_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Created by"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/task_layout"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pet_group_task_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/task_layout"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="64dp"/>
+
+        <TextView
+            android:id="@+id/add_task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/task_layout"
+            android:text="+ Add New Task"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/undo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Undo"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#9E9E9E"
+            android:layout_toStartOf="@id/line"
+            android:layout_alignBottom="@id/task_layout"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
+            android:background="#CFD8DC"
+            android:layout_toStartOf="@id/task_layout"
+            android:layout_alignBottom="@id/task_layout"
+            android:layout_alignTop="@id/task_layout"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/quick_task_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="8dp"
+            android:layout_marginBottom="16dp"
+
+            android:background="@drawable/white_transparent"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

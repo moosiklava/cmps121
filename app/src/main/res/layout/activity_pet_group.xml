@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pet_group_layout">
+
+    <ImageView
+        android:id="@+id/pet_group_pic"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/papillon_cute_puppies" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/black_transparent"
+        android:paddingBottom="8dp"
+        android:paddingTop="4dp"
+        android:layout_alignBottom="@id/pet_group_pic">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pet_group_creator"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/profile_pic_dummy"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#ffffff"/>
+
+        <TextView
+            android:id="@+id/pet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/pet_group_creator"
+            android:text="Prynce"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pet_group_creator_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pet_name"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:layout_toEndOf="@id/pet_group_creator"
+            android:text="(Owner) Remeal Holloway"
+            android:textColor="#E0E0E0" />
+
+        <TextView
+            android:id="@+id/pet_group_members"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/pet_name"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentEnd="true"
+            android:text="100 Members"
+            android:textColor="#E0E0E0" />
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pet_group_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tab_layout"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pet_group_pic"
+        app:tabGravity="center"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorWhite"
+        app:tabIndicatorHeight="4dp"
+        app:tabTextColor="#ECEFF1"
+        app:tabTextAppearance="@style/MyCustomTabTextStyle"
+        android:background="#00E5FF"
+        android:paddingBottom="4dp"
+        app:tabPaddingBottom="-8dp" />
+
+</RelativeLayout>
