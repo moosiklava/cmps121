@@ -2,4 +2,8 @@
     <string name="app_name">pettracker</string>
     <string name="edit_task_prompt">"Would you like to edit this task?"</string>
     <string name="empty_pet_task">Tap to create today\'s first task!</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

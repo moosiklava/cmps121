@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(firebaseAuth.getCurrentUser() != null)
             {
                 //profile activity here
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainMenuFinal.class));
             }
 
 
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 refId.setValue(user.getUid());
                                 Toast.makeText(MainActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                                startActivity(new Intent(getApplicationContext(),MainMenuFinal.class));
                             }else{
                                 //display some message here
                                 progressDialog.hide();
