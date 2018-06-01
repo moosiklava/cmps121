@@ -1,4 +1,4 @@
-package com.example.calendarandgoogle;
+package com.example.mdelc.pettracker;
 
 import android.content.Intent;
 import android.os.Bundle;
