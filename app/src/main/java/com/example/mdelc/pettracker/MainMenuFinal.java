@@ -1,5 +1,6 @@
 package com.example.mdelc.pettracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,15 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainMenuFinal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
+
+    //TextView uemail = (TextView) findViewById(R.id.usremail);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_final);
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_settings);
+        //uemail.setText("blubber");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +52,12 @@ public class MainMenuFinal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.usremail);
+
+        firebaseAuth = firebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        navUsername.setText(user.getEmail()+"\n");
     }
 
     @Override
@@ -67,6 +86,9 @@ public class MainMenuFinal extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Toast.makeText(this, "WHAAAAAAAAAAAAAAAAAAAAT", Toast.LENGTH_LONG).show();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.openDrawer(GravityCompat.START);
             return true;
         }
 
@@ -77,6 +99,12 @@ public class MainMenuFinal extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+/* NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.usremail);
+        navUsername.setText("MOOOOOOOOOOOOOOOOO");*/
+
+
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
