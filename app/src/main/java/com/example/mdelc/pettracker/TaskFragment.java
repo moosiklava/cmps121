@@ -150,7 +150,7 @@ public class TaskFragment extends Fragment {
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
             View myView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.pet_task_item, parent, false);
+                    .inflate(R.layout.item_pet_task, parent, false);
 
             return new ViewHolder(myView);
         }
@@ -378,7 +378,7 @@ public class TaskFragment extends Fragment {
         public QuickTaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
             View view = LayoutInflater.from(getContext())
-                    .inflate(R.layout.quick_task_item, parent, false);
+                    .inflate(R.layout.item_quick_task, parent, false);
 
             return new ViewHolder(view);
         }

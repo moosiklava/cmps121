@@ -22,7 +22,7 @@
         android:layout_alignBottom="@id/pet_group_pic">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/pet_group_creator"
+            android:id="@+id/group_creator"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="8dp"
@@ -36,21 +36,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_toEndOf="@id/pet_group_creator"
+            android:layout_toEndOf="@id/group_creator"
             android:text="Prynce"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/pet_group_creator_name"
+            android:id="@+id/pet_owner_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/pet_name"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:textSize="16sp"
-            android:layout_toEndOf="@id/pet_group_creator"
+            android:layout_toEndOf="@id/group_creator"
             android:text="(Owner) Remeal Holloway"
             android:textColor="#E0E0E0" />
 

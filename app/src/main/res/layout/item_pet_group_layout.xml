@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/item_pet_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+
+    <ImageView
+        android:id="@+id/item_pet_group_pic"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/papillon_cute_puppies" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_item_background"
+        android:paddingBottom="8dp"
+        android:paddingTop="4dp"
+        android:layout_below="@id/item_pet_group_pic">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_group_creator"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/profile_pic_dummy"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#ffffff" />
+
+        <TextView
+            android:id="@+id/item_pet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/item_group_creator"
+            android:text="Prynce"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_pet_owner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_pet_name"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:layout_toEndOf="@id/item_group_creator"
+            android:text="(Owner) Remeal Holloway"
+            android:textColor="#9E9E9E" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/pet_group_members"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@id/item_pet_name"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:text="100 Members"-->
+            <!--android:textColor="#9E9E9E" />-->
+
+    </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,10 +1,5 @@
 package com.example.mdelc.pettracker;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,19 +7,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -40,21 +27,35 @@ public class PetGroupActivity extends FragmentActivity {
     TextView petName;
     TextView petOwner;
     TextView numMembers;
+    PetGroup myPetGroup;
     CompletedTaskFragment myCompletedTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_group);
+        Bundle intent = getIntent().getExtras();
+
 
         mViewPager = findViewById(R.id.pet_group_viewpager);
         mTabLayout = findViewById(R.id.tab_layout);
-        profilePic = findViewById(R.id.pet_group_creator);
+        profilePic = findViewById(R.id.group_creator);
         groupPic = findViewById(R.id.pet_group_pic);
         petName = findViewById(R.id.pet_name);
-        petOwner = findViewById(R.id.pet_group_creator_name);
+        petOwner = findViewById(R.id.pet_owner_name);
         numMembers = findViewById(R.id.pet_group_members);
 
+
+        if(intent!=null) {
+            myPetGroup = (PetGroup) intent.getSerializable("petGroup");
+        }
+
+        if(myPetGroup!=null) {
+            profilePic.setImageResource(myPetGroup.petOwnerPic);
+            groupPic.setImageResource(myPetGroup.petPic);
+            petName.setText(myPetGroup.groupPetName);
+            petOwner.setText(myPetGroup.groupPetOwner);
+        }
         myCompletedTaskFragment = new CompletedTaskFragment();
     }
 
