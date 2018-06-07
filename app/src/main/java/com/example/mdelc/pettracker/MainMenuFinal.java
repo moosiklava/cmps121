@@ -1,6 +1,7 @@
 package com.example.mdelc.pettracker;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 public class MainMenuFinal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,10 +57,11 @@ public class MainMenuFinal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.usremail);
-
+        TextView navName = (TextView) headerView.findViewById(R.id.usrname);
         firebaseAuth = firebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         navUsername.setText(user.getEmail()+"\n");
+        navName.setText(user.getDisplayName());
     }
 
     @Override
@@ -107,22 +111,41 @@ public class MainMenuFinal extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_logout) {
+            firebaseAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_cal) {
+            startActivity(new Intent(this, DisplayDateActivity.class));
         } else if (id == R.id.nav_send) {
-
+            sendEmail();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    //Example from TutorialsPoint
+    protected void sendEmail() {
+        String[] TO = {""};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData((Uri.parse("mailto:")));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Write your message here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send message..."));
+        } catch(android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There is mo email client installed.", Toast.LENGTH_LONG).show();
+        }
+    }
 }
+
+
