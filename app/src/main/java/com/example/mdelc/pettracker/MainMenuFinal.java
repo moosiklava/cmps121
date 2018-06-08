@@ -115,7 +115,7 @@ public class MainMenuFinal extends AppCompatActivity
             firebaseAuth.signOut();
             startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.nav_profile) {
-
+            startActivity(new Intent(this, SitterProfile.class));
         } else if (id == R.id.nav_cal) {
             startActivity(new Intent(this, DisplayDateActivity.class));
         } else if (id == R.id.nav_send) {
