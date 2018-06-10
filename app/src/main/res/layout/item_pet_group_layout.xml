@@ -9,34 +9,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="16dp"
+        android:elevation="8dp"
+        android:background="@drawable/home_item_background">
 
 
     <ImageView
         android:id="@+id/item_pet_group_pic"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:scaleType="centerCrop"
         android:src="@drawable/papillon_cute_puppies" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/home_item_background"
+
         android:paddingBottom="8dp"
         android:paddingTop="4dp"
-        android:layout_below="@id/item_pet_group_pic">
+        android:layout_below="@id/item_pet_group_pic"
+        android:elevation="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/item_group_creator"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/profile_pic_dummy"
             app:civ_border_width="2dp"
-            app:civ_border_color="#ffffff" />
+            app:civ_border_color="#ffffff"
+            android:layout_alignBottom="@id/item_pet_owner_name"/>
 
         <TextView
             android:id="@+id/item_pet_name"

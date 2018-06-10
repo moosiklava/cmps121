@@ -43,6 +43,8 @@ public class MainMenuFinal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_settings);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        fab.setColorFilter(getResources().getColor(R.color.colorWhite));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +64,9 @@ public class MainMenuFinal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         homeListView = findViewById(R.id.home_group_feed);
-        petGroups.add(new PetGroup("Prynce", "(Owner) Remeal Holloway", R.drawable.bunny, R.drawable.profile_pic_dummy));
-        petGroups.add(new PetGroup("Prynce", "(Owner) Remeal Holloway", R.drawable.bunny, R.drawable.profile_pic_dummy));
-        petGroups.add(new PetGroup("Prynce", "(Owner) Remeal Holloway", R.drawable.bunny, R.drawable.profile_pic_dummy));
+        petGroups.add(new PetGroup("Ivy", "(Owner) Remeal Holloway", R.drawable.bunny, R.drawable.profile_pic_dummy));
+        petGroups.add(new PetGroup("Peaches", "(Owner) Marisela", R.drawable.cat, R.drawable.profile_pic_dummy));
+        petGroups.add(new PetGroup("Prynce", "(Owner) Donny Jones", R.drawable.papillon_cute_puppies, R.drawable.profile_pic_dummy));
 
         petGroupManager = new LinearLayoutManager(this);
         homeListView.setLayoutManager(petGroupManager);

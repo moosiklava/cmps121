@@ -7,22 +7,25 @@ import java.util.ArrayList;
  * Created by remea on 6/7/2018.
  */
 
-public class PetGroup implements Serializable {
+class PetGroup implements Serializable {
 
-    public String groupPetName;
-    public String groupPetOwner;
-    public int petPic;
-    public int petOwnerPic;
-    public ArrayList<QuickTask> groupQuickTaskList;
-    public ArrayList<PetTask> groupPetTaskList;
+    String groupPetName;
+    String groupPetOwner;
+    int petPic;
+    int petOwnerPic;
+    ArrayList<QuickTask> groupQuickTaskList;
+    ArrayList<PetTask> groupPetTaskList;
+    ArrayList<CompletedPetTask> groupCompletedTasks;
 
     PetGroup(String petName, String petOwnerName, int petPicture, int petOwnerPicture){
         groupPetName = petName;
         groupPetOwner = petOwnerName;
-        groupQuickTaskList = new ArrayList<>();
-        groupPetTaskList = new ArrayList<>();
         petPic = petPicture;
         petOwnerPic = petOwnerPicture;
+        groupQuickTaskList = new ArrayList<>();
+        groupPetTaskList = new ArrayList<>();
+        groupCompletedTasks = new ArrayList<>();
+
 
     }
 }

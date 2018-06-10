@@ -31,15 +31,10 @@ public class CompletedTaskFragment extends Fragment implements Serializable {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     public ArrayList<CompletedPetTask> completedList = new ArrayList<>();
     public ListView completedListView;
     public CompletedPetTaskAdapter completedListAdapter = new CompletedPetTaskAdapter();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -47,22 +42,12 @@ public class CompletedTaskFragment extends Fragment implements Serializable {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CompletedTaskFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CompletedTaskFragment newInstance(String param1, String param2) {
+    public static CompletedTaskFragment newInstance(ArrayList<CompletedPetTask> list1) {
 
         CompletedTaskFragment fragment = new CompletedTaskFragment();
 
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, list1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,8 +56,7 @@ public class CompletedTaskFragment extends Fragment implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            completedList = (ArrayList<CompletedPetTask>) getArguments().getSerializable(ARG_PARAM1);
         }
     }
 

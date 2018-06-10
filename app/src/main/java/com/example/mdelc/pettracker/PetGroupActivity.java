@@ -1,5 +1,6 @@
 package com.example.mdelc.pettracker;
 
+import android.app.ActionBar;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 
@@ -29,11 +32,21 @@ public class PetGroupActivity extends FragmentActivity {
     TextView numMembers;
     PetGroup myPetGroup;
     CompletedTaskFragment myCompletedTaskFragment;
+    private int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_group);
+
+        Toolbar toolbar = findViewById(R.id.pet_group_toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setActionBar(toolbar);
+        }
+
+        ActionBar ab = getActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         Bundle intent = getIntent().getExtras();
 
 
@@ -55,15 +68,16 @@ public class PetGroupActivity extends FragmentActivity {
             groupPic.setImageResource(myPetGroup.petPic);
             petName.setText(myPetGroup.groupPetName);
             petOwner.setText(myPetGroup.groupPetOwner);
+
+            myPetGroup.groupQuickTaskList.add(new QuickTask("Pet " + myPetGroup.groupPetName, index++));
+            myPetGroup.groupQuickTaskList.add(new QuickTask("Feed " + myPetGroup.groupPetName, index++));
+            myPetGroup.groupQuickTaskList.add(new QuickTask("Walk " + myPetGroup.groupPetName, index++));
+            myPetGroup.groupQuickTaskList.add(new QuickTask("Show "+ myPetGroup.groupPetName + " some love", index++));
+            myPetGroup.groupPetTaskList.add(new PetTask(getResources().getString(R.string.empty_pet_task), R.drawable.profile_pic_dummy, R.drawable.blank_person));
         }
-        myCompletedTaskFragment = new CompletedTaskFragment();
-    }
+        myCompletedTaskFragment = CompletedTaskFragment.newInstance(myPetGroup.groupCompletedTasks);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        listOfFrags.add(TaskFragment.newInstance(myCompletedTaskFragment));
+        listOfFrags.add(TaskFragment.newInstance(myCompletedTaskFragment, myPetGroup.groupPetTaskList, myPetGroup.groupQuickTaskList));
         listOfFrags.add(myCompletedTaskFragment);
 
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
@@ -73,6 +87,13 @@ public class PetGroupActivity extends FragmentActivity {
         mTabLayout.getTabAt(1).setText("Completed");
 
         wrapTabIndicatorToTitle(mTabLayout, 100, 10);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
     
     private void setMargin(ViewGroup.MarginLayoutParams layoutParams, int start, int end) {

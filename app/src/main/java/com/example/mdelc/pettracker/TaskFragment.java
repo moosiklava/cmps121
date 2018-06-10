@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,9 +42,11 @@ public class TaskFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
-    ArrayList<PetTask> taskList = new ArrayList<>();
-    ArrayList<QuickTask> quickList = new ArrayList<>();
+    ArrayList<PetTask> taskList;
+    ArrayList<QuickTask> quickList;
 
     RecyclerView taskRecyclerView;
     RecyclerView.Adapter taskAdapter;
@@ -75,10 +78,12 @@ public class TaskFragment extends Fragment {
 //     */
 
     // TODO: Rename and change types and number of parameters
-    public static TaskFragment newInstance(CompletedTaskFragment myCTF) {
+    public static TaskFragment newInstance(CompletedTaskFragment myCTF, ArrayList<PetTask> list1, ArrayList<QuickTask> list2) {
         TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, myCTF);
+        args.putSerializable(ARG_PARAM2, list1);
+        args.putSerializable(ARG_PARAM3, list2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -88,9 +93,21 @@ public class TaskFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myCompletedTaskFrag = (CompletedTaskFragment) getArguments().getSerializable(ARG_PARAM1);
+            taskList = (ArrayList) getArguments().getSerializable(ARG_PARAM2);
+            quickList = (ArrayList) getArguments().getSerializable(ARG_PARAM3);
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -121,12 +138,6 @@ public class TaskFragment extends Fragment {
 
         TextView addTask = myView.findViewById(R.id.add_task_button);
 
-        quickList.add(new QuickTask("Pet Prynce", index++));
-        quickList.add(new QuickTask("Feed Prynce", index++));
-        quickList.add(new QuickTask("Walk Prynce", index++));
-        quickList.add(new QuickTask("Show Prynce some love", index++));
-
-
         addTask.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -135,12 +146,20 @@ public class TaskFragment extends Fragment {
             }
         });
 
-        taskList.add(new PetTask((getResources().getString(R.string.empty_pet_task)), R.drawable.profile_pic_dummy, R.drawable.blank_person));
 
         return myView;
     }
 
-
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        if(taskList.size()==0) {
+//            taskList.add(new PetTask((getResources().getString(R.string.empty_pet_task)), R.drawable.profile_pic_dummy, R.drawable.blank_person));
+//        }
+//
+//
+//    }
 
     class PetTaskAdapter extends RecyclerView.Adapter<PetTaskAdapter.ViewHolder> {
 
@@ -372,6 +391,7 @@ public class TaskFragment extends Fragment {
     }
 
    private class QuickTaskAdapter extends RecyclerView.Adapter<QuickTaskAdapter.ViewHolder> {
+
 
         @NonNull
         @Override

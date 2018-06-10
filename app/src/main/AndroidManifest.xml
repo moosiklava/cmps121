@@ -25,7 +25,9 @@
         </intent-filter>
         </activity>
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".PetGroupActivity"/>
+        <activity android:name=".PetGroupActivity"
+            android:parentActivityName=".MainMenuFinal">
+        </activity>
     </application>
 
 </manifest>
