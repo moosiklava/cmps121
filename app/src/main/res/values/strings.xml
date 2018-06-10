@@ -4,6 +4,13 @@
     <string name="empty_pet_task">Tap to create today\'s first task!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Menu</string>
 
+
+    <string name="bio_hint">Enter short bio and pets that you are willing to take care of</string>
+    <string name="email_hint">example@email.com</string>
+    <string name="phone_hint">+0-000-0000</string>
+    <string name="home_hint">Santa Cruz CA, 95060</string>
+    <string name="save_button">Save</string>
+    <string name="name_string">Name</string>
 </resources>
