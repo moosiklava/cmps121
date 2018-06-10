@@ -2,6 +2,7 @@ package com.example.mdelc.pettracker;
 
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -30,6 +36,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainMenuFinal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
 
     RecyclerView homeListView;
     RecyclerView.Adapter petGroupAdapter;
@@ -62,6 +70,15 @@ public class MainMenuFinal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.usremail);
+
+        TextView navName = (TextView) headerView.findViewById(R.id.usrname);
+        firebaseAuth = firebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        navUsername.setText(user.getEmail() + "\n");
+        navName.setText(user.getDisplayName());
 
         homeListView = findViewById(R.id.home_group_feed);
         petGroups.add(new PetGroup("Ivy", "(Owner) Remeal Holloway", R.drawable.bunny, R.drawable.profile_pic_dummy));
@@ -117,7 +134,7 @@ public class MainMenuFinal extends AppCompatActivity
             return petGroups.size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder {
 
             TextView petGroupName;
             TextView petGroupOwner;
@@ -135,11 +152,10 @@ public class MainMenuFinal extends AppCompatActivity
                 petGroupCard = itemView.findViewById(R.id.item_pet_group);
 
             }
-
         }
     }
 
-        @Override
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -165,6 +181,9 @@ public class MainMenuFinal extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Toast.makeText(this, "WHAAAAAAAAAAAAAAAAAAAAT", Toast.LENGTH_LONG).show();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.openDrawer(GravityCompat.START);
             return true;
         }
 
@@ -177,22 +196,38 @@ public class MainMenuFinal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_logout) {
+            firebaseAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_cal) {
+            startActivity(new Intent(this, DisplayDateActivity.class));
         } else if (id == R.id.nav_send) {
-
+            sendEmail();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //Example from TutorialsPoint
+    protected void sendEmail() {
+        String[] TO = {""};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData((Uri.parse("mailto:")));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Write your message here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send message..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There is mo email client installed.", Toast.LENGTH_LONG).show();
+        }
     }
 }
